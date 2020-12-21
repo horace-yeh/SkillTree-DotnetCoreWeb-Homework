@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Homework.DAL;
+using Homework.Data.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Homework
 {
-     public static class SeedData
+    public static class SeedData
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
@@ -52,6 +55,19 @@ namespace Homework
             }
         }
 
+        private static string LoremIpsum()
+        {
+            using var webClient = new WebClient();
+            var baseUri = "http://more.handlino.com/sentences.json?n=8";
+            webClient.Encoding = Encoding.UTF8;
+            var jsonString = webClient.DownloadString(new Uri(baseUri));
+            using JsonDocument doc = JsonDocument.Parse(jsonString);
+            var root = doc.RootElement;
+            var students = root.GetProperty("sentences");
+            var loremIpsum = students.EnumerateArray().Select(d => d.ToString()).ToList();
+            return $"<p>{string.Join("</p><p>", loremIpsum)}</p>";
+        }
+
         private static string RandomTag()
         {
             var tags = new List<string>()
@@ -67,19 +83,6 @@ namespace Homework
             var take = Enumerable.Range(1, 5).OrderBy(d => Guid.NewGuid()).First();
             //再亂數取幾個
             return string.Join(",", tags.OrderBy(d => Guid.NewGuid()).Take(take));
-        }
-
-        private static string LoremIpsum()
-        {
-            using var webClient = new WebClient();
-            var       baseUri   = "http://more.handlino.com/sentences.json?n=8";
-            webClient.Encoding = Encoding.UTF8;
-            var                jsonString = webClient.DownloadString(new Uri(baseUri));
-            using JsonDocument doc        = JsonDocument.Parse(jsonString);
-            var        root       = doc.RootElement;
-            var        students   = root.GetProperty("sentences");
-            var loremIpsum = students.EnumerateArray().Select(d => d.ToString()).ToList();
-            return $"<p>{string.Join("</p><p>", loremIpsum )}</p>";
         }
     }
 }
