@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Arch.EntityFrameworkCore.UnitOfWork;
 using Homework.DAL;
+using Homework.Services;
+using Homework.Services.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -53,12 +56,13 @@ namespace Homework
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(Configuration
+                                    .GetConnectionString("DefaultConnection")))
+            .AddUnitOfWork<BlogDbContext>(); //加上 Unit of work 的支援
 
-            services.AddDbContext<BlogDbContext>(
-                                                  options =>
-                                                  options.UseSqlServer(Configuration
-                                                  .GetConnectionString("DefaultConnection")));
+            services.AddTransient<IBlogService, BlogService>();
+
+            services.AddControllersWithViews();
         }
     }
 }

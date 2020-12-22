@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Homework.DAL
 {
-    public class BlogDbContext : DbContext
+    public partial class BlogDbContext : DbContext
     {
         //enable-migrations
         //add-migration Init

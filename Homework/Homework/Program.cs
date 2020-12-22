@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Homework.DAL;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -11,10 +13,19 @@ namespace Homework
 {
     public class Program
     {
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-             #region SeedData init
+
+            #region SeedData init
+
             //下面打開，上面要註解掉
             //var host = CreateHostBuilder(args).Build();
 
@@ -36,14 +47,8 @@ namespace Homework
             //}
 
             //host.Run();
-            #endregion
-        }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+            #endregion SeedData init
+        }
     }
 }
