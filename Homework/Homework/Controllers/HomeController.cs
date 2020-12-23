@@ -29,9 +29,8 @@ namespace Homework.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var temp = await _blogService.GetAllArticleAsync();
-
-            return View();
+            var model = await _blogService.GetAllArticleAsync();
+            return View(model);
         }
 
         public IActionResult Privacy()
