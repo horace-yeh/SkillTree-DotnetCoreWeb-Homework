@@ -1,27 +1,30 @@
 ﻿@using Homework.Data.Models;
+@addTagHelper *, Homework
 @model List<Articles>
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <h1 class="my-4">
-    Page Heading
-    <small>Secondary Text</small>
+    SkillTree Blog
+    <small>文章列表</small>
 </h1>
 <!-- Blog Post -->
 @foreach (var item in Model)
 {
-    <div class="card mb-4">
-        <img class="card-img-top" src="@item.CoverPhoto" alt="@item.Title">
-        <div class="card-body">
-            <h2 class="card-title">@item.Title</h2>
-            <p class="card-text">@Html.Raw(@item.Body)</p>
-            <a href="#" class="btn btn-primary">@item.Tags</a>
-        </div>
-        <div class="card-footer text-muted">
-            Posted on @item.CreateDate.ToString("yyyy-MM-dd") by you
-        </div>
-    </div>
+    <vc:summary guid="@item.Id"></vc:summary>
+
+    @*<div class="card mb-4">
+            <img class="card-img-top" src="@item.CoverPhoto" alt="@item.Title">
+            <div class="card-body">
+                <h2 class="card-title">@item.Title</h2>
+                <p class="card-text">@Html.Raw(@item.Body)</p>
+                <a href="#" class="btn btn-primary">@item.Tags</a>
+            </div>
+            <div class="card-footer text-muted">
+                Posted on @item.CreateDate.ToString("yyyy-MM-dd") by you
+            </div>
+        </div>*@
 }
 
 <!-- Pagination -->

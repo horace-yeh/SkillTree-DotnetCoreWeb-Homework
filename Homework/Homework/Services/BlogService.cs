@@ -31,7 +31,12 @@ namespace Homework.Services
         {
             var temp = await _articlesRepository.GetAll().ToListAsync();
             return temp;
-            throw new NotImplementedException();
+        }
+
+        public async ValueTask<Articles> GetArticleAsync(Guid Id)
+        {
+            var temp = await _articlesRepository.GetAll().Where(x => x.Id == Id).FirstOrDefaultAsync();
+            return temp;
         }
 
         public ValueTask SaveAsync()

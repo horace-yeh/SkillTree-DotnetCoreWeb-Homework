@@ -1,0 +1,13 @@
+﻿@model Homework.Data.Models.Articles
+
+<div class="card mb-4">
+    <img class="card-img-top" src="@Model.CoverPhoto" alt="@Model.Title">
+    <div class="card-body">
+        <h2 class="card-title">@Model.Title</h2>
+        <p class="card-text">@Html.Raw(Model.Body)</p>
+        <a href="#" class="btn btn-primary">@Model.Tags</a>
+    </div>
+    <div class="card-footer text-muted">
+        Posted on @Model.CreateDate.ToString("yyyy-MM-dd") by you
+    </div>
+</div>
