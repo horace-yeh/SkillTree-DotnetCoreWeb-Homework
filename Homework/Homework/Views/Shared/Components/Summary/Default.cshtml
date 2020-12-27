@@ -5,10 +5,7 @@
     <div class="card-body">
         <h2 class="card-title">@Model.Title</h2>
         <p class="card-text">@Html.Raw(Model.Body)</p>
-        @foreach (var item in Model.Tags.Split(","))
-        {
-            <a href="#" class="btn btn-outline-primary btn-sm">@item</a>
-        }
+        @await Html.PartialAsync("_TagPartail", Model.Tags)
     </div>
     <div class="card-footer text-muted">
         Posted on @Model.CreateDate.ToString("yyyy-MM-dd") by you
