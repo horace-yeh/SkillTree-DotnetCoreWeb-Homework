@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Homework.DAL;
 using Arch.EntityFrameworkCore.UnitOfWork.Collections;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Homework.Services
 {
@@ -50,6 +51,11 @@ namespace Homework.Services
         public async ValueTask<IPagedList<Articles>> ToPagedListArticleAsync(int pageIndex, int pageSize)
         {
             return await _articlesRepository.GetPagedListAsync(pageIndex: pageIndex, pageSize: pageSize);
+        }
+
+        public async ValueTask<IPagedList<Articles>> ToPagedListArticleByTagAsync(string tag, int pageIndex, int pageSize)
+        {
+            return await _articlesRepository.GetPagedListAsync(predicate: x => x.Tags.Contains(tag), pageIndex: pageIndex, pageSize: pageSize);
         }
     }
 }

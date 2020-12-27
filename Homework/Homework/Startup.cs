@@ -8,7 +8,7 @@ using Homework.Services;
 using Homework.Services.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -61,6 +61,8 @@ namespace Homework
             .AddUnitOfWork<BlogDbContext>(); //加上 Unit of work 的支援
 
             services.AddTransient<IBlogService, BlogService>();
+            //TagHelp IActionContextAccessor
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
             services.AddControllersWithViews();
         }

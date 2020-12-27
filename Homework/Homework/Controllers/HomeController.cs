@@ -34,6 +34,17 @@ namespace Homework.Controllers
             return View(model);
         }
 
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Tags(string qq, int page = 0, int pageSize = 5)
+        {
+            var model = await _blogService.ToPagedListArticleByTagAsync(qq, page, pageSize);
+            return View("Index", model);
+        }
+
         //// GET api/values/Page/5/10
         //[HttpGet("Page/{pageIndex}/{pageSize}")]
         //public async Task<IPagedList<Blog>> Get(int pageIndex, int pageSize)
@@ -43,10 +54,5 @@ namespace Homework.Controllers
 
         //    return await _unitOfWork.GetRepository<Blog>().GetPagedListAsync(pageIndex: pageIndex, pageSize: pageSize);
         //}
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
     }
 }

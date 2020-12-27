@@ -15,6 +15,8 @@ namespace Homework.Services.Interface
 
         ValueTask SaveAsync();
 
-        ValueTask<IPagedList<Articles>> ToPagedListArticleAsync(int pageNumber, int pageSize);
+        ValueTask<IPagedList<Articles>> ToPagedListArticleAsync(int pageIndex, int pageSize);
+
+        ValueTask<IPagedList<Articles>> ToPagedListArticleByTagAsync(string tag, int pageIndex, int pageSize);
     }
 }
