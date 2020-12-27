@@ -27,11 +27,22 @@ namespace Homework.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 0, int pageSize = 5)
         {
-            var model = await _blogService.GetAllArticleAsync();
+            //var model = await _blogService.GetAllArticleAsync();
+            var model = await _blogService.ToPagedListArticleAsync(page, pageSize);
             return View(model);
         }
+
+        //// GET api/values/Page/5/10
+        //[HttpGet("Page/{pageIndex}/{pageSize}")]
+        //public async Task<IPagedList<Blog>> Get(int pageIndex, int pageSize)
+        //{
+        //    // projection
+        //    var items = _unitOfWork.GetRepository<Blog>().GetPagedList(b => new { Name = b.Title, Link = b.Url });
+
+        //    return await _unitOfWork.GetRepository<Blog>().GetPagedListAsync(pageIndex: pageIndex, pageSize: pageSize);
+        //}
 
         public IActionResult Privacy()
         {

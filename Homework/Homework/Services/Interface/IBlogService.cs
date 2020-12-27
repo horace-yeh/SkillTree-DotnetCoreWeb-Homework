@@ -1,4 +1,5 @@
-﻿using Homework.Data.Models;
+﻿using Arch.EntityFrameworkCore.UnitOfWork.Collections;
+using Homework.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,7 @@ namespace Homework.Services.Interface
         ValueTask<Articles> GetArticleAsync(Guid Id);
 
         ValueTask SaveAsync();
+
+        ValueTask<IPagedList<Articles>> ToPagedListArticleAsync(int pageNumber, int pageSize);
     }
 }

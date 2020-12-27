@@ -7,11 +7,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Homework.DAL;
+using Arch.EntityFrameworkCore.UnitOfWork.Collections;
 
 namespace Homework.Services
 {
     public class BlogService : IBlogService
     {
+        //EF Core unitofwork https://github.com/Arch/UnitOfWork
+
         private readonly IRepository<Articles> _articlesRepository;
 
         //private readonly BlogDbContext _blogDbContext;
@@ -39,9 +42,14 @@ namespace Homework.Services
             return temp;
         }
 
-        public ValueTask SaveAsync()
+        public async ValueTask SaveAsync()
         {
-            throw new NotImplementedException();
+            await _unitOfWork.SaveChangesAsync();
+        }
+
+        public async ValueTask<IPagedList<Articles>> ToPagedListArticleAsync(int pageIndex, int pageSize)
+        {
+            return await _articlesRepository.GetPagedListAsync(pageIndex: pageIndex, pageSize: pageSize);
         }
     }
 }

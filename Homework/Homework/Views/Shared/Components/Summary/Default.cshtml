@@ -5,7 +5,10 @@
     <div class="card-body">
         <h2 class="card-title">@Model.Title</h2>
         <p class="card-text">@Html.Raw(Model.Body)</p>
-        <a href="#" class="btn btn-primary">@Model.Tags</a>
+        @foreach (var item in Model.Tags.Split(","))
+        {
+            <a href="#" class="btn btn-outline-primary btn-sm">@item</a>
+        }
     </div>
     <div class="card-footer text-muted">
         Posted on @Model.CreateDate.ToString("yyyy-MM-dd") by you
