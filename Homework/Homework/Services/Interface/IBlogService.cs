@@ -17,6 +17,8 @@ namespace Homework.Services.Interface
 
         ValueTask<IPagedList<Articles>> ToPagedListArticleAsync(int pageIndex, int pageSize);
 
+        ValueTask<IPagedList<Articles>> ToPagedListArticleBySearchAsync(string keyword, int pageIndex, int pageSize);
+
         ValueTask<IPagedList<Articles>> ToPagedListArticleByTagAsync(string tag, int pageIndex, int pageSize);
     }
 }

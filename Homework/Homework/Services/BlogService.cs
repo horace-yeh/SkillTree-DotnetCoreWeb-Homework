@@ -53,6 +53,16 @@ namespace Homework.Services
             return await _articlesRepository.GetPagedListAsync(pageIndex: pageIndex, pageSize: pageSize);
         }
 
+        public async ValueTask<IPagedList<Articles>> ToPagedListArticleBySearchAsync(string keyword, int pageIndex, int pageSize)
+        {
+            return await _articlesRepository.GetPagedListAsync
+                (
+                    predicate: (x => x.Tags.Contains(keyword) || x.Title.Contains(keyword) || x.Body.Contains(keyword)),
+                    pageIndex: pageIndex,
+                    pageSize: pageSize
+                );
+        }
+
         public async ValueTask<IPagedList<Articles>> ToPagedListArticleByTagAsync(string tag, int pageIndex, int pageSize)
         {
             return await _articlesRepository.GetPagedListAsync(predicate: x => x.Tags.Contains(tag), pageIndex: pageIndex, pageSize: pageSize);

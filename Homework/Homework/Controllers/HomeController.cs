@@ -7,11 +7,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Homework.Models;
 using Homework.Services.Interface;
+using Homework.Data.ViewModels;
 
 namespace Homework.Controllers
 {
     public class HomeController : Controller
     {
+        #region 問題紀錄
+
+        /* 1. EFcore 有辦法抽離成repository service架構嗎，不在主要專案安裝EFCore?
+         * 2. Model 專案拆分可實現性? 目前因為需要IPagedList，所以也裝了Arch.EntityFrameworkCore.UnitOfWork
+         *
+         */
+
+        #endregion 問題紀錄
+
+        //TODO: Pagination 需要改寫配合，不同的搜尋機制產生對應的分頁
+
         private readonly IBlogService _blogService;
         private readonly ILogger<HomeController> _logger;
 
@@ -29,8 +41,8 @@ namespace Homework.Controllers
 
         public async Task<IActionResult> Index(int page = 0, int pageSize = 5)
         {
-            //var model = await _blogService.GetAllArticleAsync();
-            var model = await _blogService.ToPagedListArticleAsync(page, pageSize);
+            ViewBag.ActionName = "Index";
+            var model = new HomeIndexViewModel { ArticlesList = await _blogService.ToPagedListArticleAsync(page, pageSize) };
             return View(model);
         }
 
@@ -39,20 +51,20 @@ namespace Homework.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Tags(string qq, int page = 0, int pageSize = 5)
+        public async Task<IActionResult> Search(string q, int page = 0, int pageSize = 5)
         {
-            var model = await _blogService.ToPagedListArticleByTagAsync(qq, page, pageSize);
+            ViewBag.ActionName = "Search";
+            ViewBag.q = q;
+            var model = new HomeIndexViewModel { ArticlesList = await _blogService.ToPagedListArticleBySearchAsync(q, page, pageSize) };
             return View("Index", model);
         }
 
-        //// GET api/values/Page/5/10
-        //[HttpGet("Page/{pageIndex}/{pageSize}")]
-        //public async Task<IPagedList<Blog>> Get(int pageIndex, int pageSize)
-        //{
-        //    // projection
-        //    var items = _unitOfWork.GetRepository<Blog>().GetPagedList(b => new { Name = b.Title, Link = b.Url });
-
-        //    return await _unitOfWork.GetRepository<Blog>().GetPagedListAsync(pageIndex: pageIndex, pageSize: pageSize);
-        //}
+        public async Task<IActionResult> Tags(string qq, int page = 0, int pageSize = 5)
+        {
+            ViewBag.ActionName = "Tags";
+            ViewBag.qq = qq;
+            var model = new HomeIndexViewModel { ArticlesList = await _blogService.ToPagedListArticleByTagAsync(qq, page, pageSize) };
+            return View("Index", model);
+        }
     }
 }

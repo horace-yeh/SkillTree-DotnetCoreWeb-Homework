@@ -84,5 +84,16 @@ namespace Homework
             //再亂數取幾個
             return string.Join(",", tags.OrderBy(d => Guid.NewGuid()).Take(take));
         }
+
+        #region TagCloud 資料相關
+
+        /* 空空自己產
+         * Declare @temp nvarchar(50)= 'RazorPage'
+         * insert into[BlogSkillTree].[dbo].[TagCloud]
+         * select NEWID(),count(1),@temp
+         * from[dbo].[Articles] where Tags like '%'+@temp+'%'
+         */
+
+        #endregion TagCloud 資料相關
     }
 }
