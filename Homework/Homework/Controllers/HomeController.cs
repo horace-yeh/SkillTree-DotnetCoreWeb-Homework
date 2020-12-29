@@ -42,7 +42,11 @@ namespace Homework.Controllers
         public async Task<IActionResult> Index(int page = 0, int pageSize = 5)
         {
             ViewBag.ActionName = "Index";
-            var model = new HomeIndexViewModel { ArticlesList = await _blogService.ToPagedListArticleAsync(page, pageSize) };
+            var model = new HomeIndexViewModel
+            {
+                ArticlesList = await _blogService.ToPagedListArticleAsync(page, pageSize),
+                ActionName = "Index"
+            };
             return View(model);
         }
 
@@ -53,17 +57,24 @@ namespace Homework.Controllers
 
         public async Task<IActionResult> Search(string q, int page = 0, int pageSize = 5)
         {
-            ViewBag.ActionName = "Search";
             ViewBag.q = q;
-            var model = new HomeIndexViewModel { ArticlesList = await _blogService.ToPagedListArticleBySearchAsync(q, page, pageSize) };
+            var model = new HomeIndexViewModel
+            {
+                ArticlesList = await _blogService.ToPagedListArticleBySearchAsync(q, page, pageSize),
+                ActionName = "Search",
+                Q = q
+            };
             return View("Index", model);
         }
 
         public async Task<IActionResult> Tags(string qq, int page = 0, int pageSize = 5)
         {
-            ViewBag.ActionName = "Tags";
-            ViewBag.qq = qq;
-            var model = new HomeIndexViewModel { ArticlesList = await _blogService.ToPagedListArticleByTagAsync(qq, page, pageSize) };
+            var model = new HomeIndexViewModel
+            {
+                ArticlesList = await _blogService.ToPagedListArticleByTagAsync(qq, page, pageSize),
+                ActionName = "Tags",
+                QQ = qq
+            };
             return View("Index", model);
         }
     }

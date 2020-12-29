@@ -8,6 +8,9 @@ namespace Homework.Data.ViewModels
 {
     public class HomeIndexViewModel
     {
+        public string ActionName { get; set; }
         public IPagedList<Articles> ArticlesList { get; set; }
+        public string Q { get; set; }
+        public string QQ { get; set; }
     }
 }
