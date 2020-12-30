@@ -6,9 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Homework.DAL;
 using Arch.EntityFrameworkCore.UnitOfWork.Collections;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Homework.Services
 {
@@ -18,14 +16,12 @@ namespace Homework.Services
 
         private readonly IRepository<Articles> _articlesRepository;
 
-        //private readonly BlogDbContext _blogDbContext;
         private readonly IRepository<TagCloud> _tagClodRepository;
 
         private readonly IUnitOfWork _unitOfWork;
 
         public BlogService(IUnitOfWork unitOfWork)
         {
-            //_blogDbContext = blogDbContext;
             _unitOfWork = unitOfWork;
             _articlesRepository = unitOfWork.GetRepository<Articles>();
             _tagClodRepository = unitOfWork.GetRepository<TagCloud>();
@@ -34,6 +30,12 @@ namespace Homework.Services
         public async ValueTask<IList<Articles>> GetAllArticleAsync()
         {
             var temp = await _articlesRepository.GetAll().ToListAsync();
+            return temp;
+        }
+
+        public async ValueTask<IList<TagCloud>> GetAllTagCloudAsync()
+        {
+            var temp = await _tagClodRepository.GetAll().ToListAsync();
             return temp;
         }
 

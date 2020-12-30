@@ -50,6 +50,16 @@ namespace Homework.Controllers
             return View(model);
         }
 
+        public async Task<JsonResult> JsonGetTagCloud()
+        {
+            //"tag": "wpf",
+            //"count": "147538"
+
+            var data = await _blogService.GetAllTagCloudAsync();
+            var re = data.Select(x => new { tag = x.Name, count = x.Amount.ToString() }).ToList();
+            return Json(re);
+        }
+
         public IActionResult Privacy()
         {
             return View();

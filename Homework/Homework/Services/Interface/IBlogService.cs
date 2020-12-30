@@ -11,6 +11,8 @@ namespace Homework.Services.Interface
     {
         ValueTask<IList<Articles>> GetAllArticleAsync();
 
+        ValueTask<IList<TagCloud>> GetAllTagCloudAsync();
+
         ValueTask<Articles> GetArticleAsync(Guid Id);
 
         ValueTask SaveAsync();
