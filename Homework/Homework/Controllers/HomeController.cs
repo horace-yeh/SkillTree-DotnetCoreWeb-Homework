@@ -33,6 +33,12 @@ namespace Homework.Controllers
             _blogService = blogService;
         }
 
+        public async Task<IActionResult> Detial(Guid id)
+        {
+            var model = await _blogService.GetArticleAsync(id);
+            return View(model);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

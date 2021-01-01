@@ -1,11 +1,17 @@
 ﻿@model Homework.Data.Models.Articles
+@using System.Text.RegularExpressions;
 
 <div class="card mb-4">
     <img class="card-img-top" src="@Model.CoverPhoto" alt="@Model.Title">
     <div class="card-body">
         <h2 class="card-title">@Model.Title</h2>
-        <p class="card-text">@Html.Raw(Model.Body)</p>
+        <!-- 文章只取第一段<p></p> 模擬摘要的感覺-->
+        <p>@Html.Raw(Regex.Matches(Model.Body, "<p>(.*?)</p>").Cast<Match>().FirstOrDefault())</p>
+        @*<p class="card-text">@Html.Raw(Model.Body)</p>*@
         @await Html.PartialAsync("_TagPartail", Model.Tags)
+        <div class="row justify-content-center">
+            <a asp-controller="Home" asp-action="Detial" asp-route-id="@Model.Id" class="btn btn-primary">Read More</a>
+        </div>
     </div>
     <div class="card-footer text-muted">
         Posted on @Model.CreateDate.ToString("yyyy-MM-dd") by you

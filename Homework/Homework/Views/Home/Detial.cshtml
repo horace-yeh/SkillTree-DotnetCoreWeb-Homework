@@ -1,0 +1,28 @@
+﻿@model Homework.Data.Models.Articles
+
+@{
+    ViewData["Title"] = "Detial";
+}
+
+<div>
+    <div class="row">
+        <h4>@Model.Title</h4>
+        <h6 class="px-2 mx-2 btn btn-secondary btn-sm">@Model.CreateDate.ToString("yyyy-MM-dd")</h6>
+    </div>
+    <hr />
+    <div class="row">
+        <img src="@Model.CoverPhoto" alt="@Model.Title">
+    </div>
+    <br />
+    <div class="row">
+        @Html.Raw(Model.Body)
+    </div>
+    <div class="row">
+        @await Html.PartialAsync("_TagPartail", Model.Tags)
+    </div>
+</div>
+<hr />
+<div class="row justify-content-center">
+    <a asp-action="Index" class="btn btn-primary">Back to Home</a>
+</div>
+<br/>

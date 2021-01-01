@@ -1,7 +1,9 @@
 ﻿@addTagHelper *, Homework
 @model string
 
-@foreach (var item in Model.Split(","))
-{
-    <tags>@item</tags>
-}
+<div class="row px-1">
+    @foreach (var item in Model.Split(","))
+    {
+        <tags>@item</tags>
+    }
+</div>

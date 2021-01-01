@@ -41,7 +41,7 @@ namespace Homework.Services
 
         public async ValueTask<Articles> GetArticleAsync(Guid Id)
         {
-            var temp = await _articlesRepository.GetAll().Where(x => x.Id == Id).FirstOrDefaultAsync();
+            var temp = await _articlesRepository.GetFirstOrDefaultAsync(predicate: x => x.Id == Id);
             return temp;
         }
 

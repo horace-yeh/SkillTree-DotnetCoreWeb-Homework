@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace Homework.Helper.Tag
@@ -30,6 +31,7 @@ namespace Homework.Helper.Tag
             var target = content.GetContent();
             var url = $"{urlHelper.Action("Tags", "Home")}?qq={target}";
             output.Attributes.SetAttribute("href", url);
+            output.Attributes.SetAttribute("class", "btn btn-outline-success btn-sm mx-1");
             output.TagName = "a";
         }
     }
