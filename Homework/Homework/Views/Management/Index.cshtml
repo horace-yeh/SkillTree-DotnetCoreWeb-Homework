@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Homework.Data.Models.Articles>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>文章管理</h3>
+<div class="row justify-content-end">
+    <a class="btn btn-outline-success btn-sm my-2" asp-action="Create">Create New</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <p>@item.Title</p>
+                </td>
+                <td>
+                    <p>@item.CreateDate.ToString("yyyy/MM/dd HH:mm:ss")</p>
+                </td>
+                <td>
+                    <a class="btn btn-outline-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
