@@ -4,6 +4,13 @@
     ViewData["Title"] = "Create";
 }
 
+@section HeadCss {
+    <!-- pickadate.js v3.5.6 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/compressed/themes/classic.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/themes/classic.date.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/themes/classic.time.css" rel="stylesheet" />
+
+}
 <h4>文章建立</h4>
 <hr />
 <div class="row">
@@ -16,23 +23,23 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             @*
-        <div class="form-group">
-            <label asp-for="CoverPhoto" class="control-label"></label>
-            <input asp-for="CoverPhoto" class="form-control" />
-            <span asp-validation-for="CoverPhoto" class="text-danger"></span>
-        </div>
+                <div class="form-group">
+                    <label asp-for="CoverPhoto" class="control-label"></label>
+                    <input asp-for="CoverPhoto" class="form-control" />
+                    <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+                </div>
             *@
             @*<div class="form-group">
-            <label asp-for="CoverPhotoImg" class="control-label"></label>
-            <input asp-for="CoverPhotoImg" type="file" class="form-control" />
-            <span asp-validation-for="CoverPhotoImg" class="text-danger"></span>
-        </div>*@
+                    <label asp-for="CoverPhotoImg" class="control-label"></label>
+                    <input asp-for="CoverPhotoImg" type="file" class="form-control" />
+                    <span asp-validation-for="CoverPhotoImg" class="text-danger"></span>
+                </div>*@
 
             @*<div class="custom-file">
-            <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-            <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-            <div class="invalid-feedback">Example invalid custom file feedback</div>
-        </div>*@
+                    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                </div>*@
             <div class="form-group">
                 <label asp-for="Body" class="control-label"></label>
                 <input asp-for="Body" class="form-control" />
@@ -45,7 +52,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="CreateDate" class="control-label"></label>
-                <input asp-for="CreateDate" class="form-control" />
+                <input type="text" asp-for="CreateDate" class="form-control" />
                 <span asp-validation-for="CreateDate" class="text-danger"></span>
             </div>
             <div class="form-group custom-file">
@@ -59,13 +66,15 @@
         </form>
     </div>
 </div>
-<hr/>
+<hr />
 <div>
     <a class="btn btn-primary" asp-action="Index">回到文章管理</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-<script src="~/js/managementCreate.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/compressed/picker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/compressed/picker.date.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/compressed/picker.time.js"></script>
+    <script src="~/js/managementCreate.js"></script>
 }
