@@ -27,9 +27,16 @@ namespace Homework.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] ArticlesCreate model)
+        public IActionResult Create(ArticlesCreate model)
         {
-            var temp = model;
+            //[Bind("CoverPhotoImg")] 圖片綁定沒加會撈空
+
+            ModelState.Remove("CoverPhoto"); // 移除原先圖片必填欄位驗證
+            if (ModelState.IsValid)
+            {
+                var temp = model;
+            }
+
             return View(model);
         }
 
