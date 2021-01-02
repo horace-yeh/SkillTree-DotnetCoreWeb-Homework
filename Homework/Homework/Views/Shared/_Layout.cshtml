@@ -11,14 +11,14 @@
     <header>
         <!-- Fixed navbar -->
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" asp-action="Index">SkillTree Homework</a>
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">SkillTree Homework</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" asp-action="Index">Home <span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Management" asp-action="Index">Management</a>
@@ -92,9 +92,11 @@
                     </div>*@
                 <!-- Side Widget -->
                 <div class="card my-4">
-                    <h5 class="card-header">Side Widget</h5>
-                    <div class="card-body">
-                        <partial name="_SkillTree" />
+                    <div>
+                        <h5 class="card-header">推薦連結</h5>
+                        <div class="card-body">
+                            <partial name="_SkillTree" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -104,7 +106,7 @@
         <div class="container">
             <p class="m-0 text-center text-white">
                 Copyright &copy; Your Website @(DateTime.Now.Year)
-                <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                @*<a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
             </p>
         </div>
     </footer>

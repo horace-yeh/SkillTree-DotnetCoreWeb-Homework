@@ -1,4 +1,6 @@
-﻿using Homework.Services.Interface;
+﻿using Homework.Data.Models;
+using Homework.Data.ViewModels;
+using Homework.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,6 +19,18 @@ namespace Homework.Controllers
         {
             _logger = logger;
             _blogService = blogService;
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create([FromBody] ArticlesCreate model)
+        {
+            var temp = model;
+            return View(model);
         }
 
         public async Task<IActionResult> Index()

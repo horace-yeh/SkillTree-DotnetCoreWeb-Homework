@@ -9,7 +9,7 @@
         <p>@Html.Raw(Regex.Matches(Model.Body, "<p>(.*?)</p>").Cast<Match>().FirstOrDefault())</p>
         @*<p class="card-text">@Html.Raw(Model.Body)</p>*@
         @await Html.PartialAsync("_TagPartail", Model.Tags)
-        <div class="row justify-content-center">
+        <div class="row justify-content-center my-2">
             <a asp-controller="Home" asp-action="Detial" asp-route-id="@Model.Id" class="btn btn-primary">Read More</a>
         </div>
     </div>

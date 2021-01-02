@@ -1,0 +1,71 @@
+﻿@model Homework.Data.ViewModels.ArticlesCreate
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>文章建立</h4>
+<hr />
+<div class="row">
+    <div class="col-12">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            @*
+        <div class="form-group">
+            <label asp-for="CoverPhoto" class="control-label"></label>
+            <input asp-for="CoverPhoto" class="form-control" />
+            <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+        </div>
+            *@
+            @*<div class="form-group">
+            <label asp-for="CoverPhotoImg" class="control-label"></label>
+            <input asp-for="CoverPhotoImg" type="file" class="form-control" />
+            <span asp-validation-for="CoverPhotoImg" class="text-danger"></span>
+        </div>*@
+
+            @*<div class="custom-file">
+            <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+            <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+            <div class="invalid-feedback">Example invalid custom file feedback</div>
+        </div>*@
+            <div class="form-group">
+                <label asp-for="Body" class="control-label"></label>
+                <input asp-for="Body" class="form-control" />
+                <span asp-validation-for="Body" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tags" class="control-label"></label>
+                <input asp-for="Tags" class="form-control" />
+                <span asp-validation-for="Tags" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateDate" class="control-label"></label>
+                <input asp-for="CreateDate" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group custom-file">
+                <label asp-for="CoverPhotoImg" class="control-label custom-file-label"></label>
+                <input asp-for="CoverPhotoImg" type="file" class="form-control custom-file-input" />
+                <span asp-validation-for="CoverPhotoImg" class="text-danger"></span>
+            </div>
+            <div class="form-group my-2 row justify-content-center">
+                <input type="submit" value="建立文章" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr/>
+<div>
+    <a class="btn btn-primary" asp-action="Index">回到文章管理</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script src="~/js/managementCreate.js"></script>
+
+}

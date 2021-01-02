@@ -10,10 +10,12 @@ namespace Homework.Data.Models
     // TODO 為何使用partial class
     public partial class Articles
     {
-        [Required]
+        [DisplayName("文章內文")]
+        [Required(ErrorMessage = "文章內文為必填欄位")]
         public string Body { get; set; }
 
-        [Required]
+        [DisplayName("文章照片")]
+        [Required(ErrorMessage = "文章照片為必填欄位")]
         [StringLength(250)]
         public string CoverPhoto { get; set; }
 
@@ -23,11 +25,13 @@ namespace Homework.Data.Models
 
         public DayOfWeek DayOfWeek { get; set; }
         public Guid Id { get; set; }
+
+        [DisplayName("文章標籤")]
         public string Tags { get; set; }
 
         [DisplayName("文章標題")]
-        [Required]
-        [StringLength(100)]
+        [Required(ErrorMessage = "文章標題為必填欄位")]
+        [StringLength(maximumLength: 100, ErrorMessage = "文章標題長度限制為100")]
         public string Title { get; set; }
     }
 }
