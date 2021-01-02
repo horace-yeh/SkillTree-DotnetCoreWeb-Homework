@@ -13,12 +13,33 @@
         $('#CreateDate').pickadate({
             showMonthsShort: true,
             format: 'yyyy/mm/dd',
-            formatSubmit: 'yyyy-mm-dd',
             hiddenName: true
         })
+    }
+
+    function selectTagInit() {
+        var url = $('#tagCloudTextUrl').val();
+        $.ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'json',
+            success: function (res) {
+                setTagCloudSelect(res);
+                //console.log(res);
+            },
+            error: function (err) { console.log(err) },
+        });
+    }
+
+    function setTagCloudSelect(tagArr) {
+        $('#Tags').select2({
+            tags: true,
+            data: tagArr
+        });
     }
 
     // call init
     inputFileInit();
     datePickerInit();
+    selectTagInit();
 });

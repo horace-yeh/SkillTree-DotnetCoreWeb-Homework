@@ -39,6 +39,12 @@ namespace Homework.Services
             return temp;
         }
 
+        public async ValueTask<IList<string>> GetAllTagCloudTextAsync()
+        {
+            var temp = await _tagClodRepository.GetAll().Select(x => x.Name).ToListAsync();
+            return temp;
+        }
+
         public async ValueTask<Articles> GetArticleAsync(Guid Id)
         {
             var temp = await _articlesRepository.GetFirstOrDefaultAsync(predicate: x => x.Id == Id);

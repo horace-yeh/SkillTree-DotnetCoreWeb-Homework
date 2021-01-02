@@ -45,5 +45,11 @@ namespace Homework.Controllers
             var model = await _blogService.GetAllArticleAsync();
             return View(model);
         }
+
+        public async Task<JsonResult> JsonGetTagCloudText()
+        {
+            var data = await _blogService.GetAllTagCloudTextAsync();
+            return Json(data);
+        }
     }
 }

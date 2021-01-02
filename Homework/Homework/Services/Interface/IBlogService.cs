@@ -13,6 +13,8 @@ namespace Homework.Services.Interface
 
         ValueTask<IList<TagCloud>> GetAllTagCloudAsync();
 
+        ValueTask<IList<string>> GetAllTagCloudTextAsync();
+
         ValueTask<Articles> GetArticleAsync(Guid Id);
 
         ValueTask SaveAsync();
