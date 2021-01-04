@@ -24,6 +24,7 @@
             method: 'GET',
             dataType: 'json',
             success: function (res) {
+                console.log(res);
                 setTagCloudSelect(res);
                 //console.log(res);
             },
@@ -32,14 +33,20 @@
     }
 
     function setTagCloudSelect(tagArr) {
-        $('#Tags').select2({
+        $('#TagsArray').select2({
             tags: true,
-            data: tagArr
+            data: tagArr,
+            tokenSeparators: [',']
         });
+    }
+
+    function ckeditorInit() {
+        CKEDITOR.replace('Body');
     }
 
     // call init
     inputFileInit();
     datePickerInit();
     selectTagInit();
+    ckeditorInit();
 });

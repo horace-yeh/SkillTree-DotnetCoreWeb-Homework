@@ -29,32 +29,32 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             @*
-        <div class="form-group">
-            <label asp-for="CoverPhoto" class="control-label"></label>
-            <input asp-for="CoverPhoto" class="form-control" />
-            <span asp-validation-for="CoverPhoto" class="text-danger"></span>
-        </div>
+                <div class="form-group">
+                    <label asp-for="CoverPhoto" class="control-label"></label>
+                    <input asp-for="CoverPhoto" class="form-control" />
+                    <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+                </div>
             *@
             @*<div class="form-group">
-            <label asp-for="CoverPhotoImg" class="control-label"></label>
-            <input asp-for="CoverPhotoImg" type="file" class="form-control" />
-            <span asp-validation-for="CoverPhotoImg" class="text-danger"></span>
-        </div>*@
+                    <label asp-for="CoverPhotoImg" class="control-label"></label>
+                    <input asp-for="CoverPhotoImg" type="file" class="form-control" />
+                    <span asp-validation-for="CoverPhotoImg" class="text-danger"></span>
+                </div>*@
 
             @*<div class="custom-file">
-            <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-            <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-            <div class="invalid-feedback">Example invalid custom file feedback</div>
-        </div>*@
+                    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                </div>*@
             <div class="form-group">
                 <label asp-for="Body" class="control-label"></label>
-                <input asp-for="Body" class="form-control" />
+                <textarea asp-for="Body" class="form-control"></textarea>
                 <span asp-validation-for="Body" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Tags" class="control-label"></label>
-                <select asp-for="Tags" class="form-control"  multiple="multiple" />
-                <span asp-validation-for="Tags" class="text-danger"></span>
+                <label asp-for="TagsArray" class="control-label"></label>
+                <select asp-for="TagsArray" class="form-control" multiple="multiple" />
+                <span asp-validation-for="TagsArray" class="text-danger"></span>
             </div>
             <div class="form-group">
                 @*<label asp-for="CreateDate" class="control-label"></label>*@
@@ -90,6 +90,9 @@
     <!-- #region select2 v4.0.13 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
     <!-- #endregion select2 v4.0.13 -->
+    <!--#region CKEditor-->
+    <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
+    <!--#endregion CKEditor-->
 
     <script src="~/js/managementCreate.js" asp-append-version="true"></script>
 }

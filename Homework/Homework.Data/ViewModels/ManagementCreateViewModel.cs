@@ -18,9 +18,12 @@ namespace Homework.Data.ViewModels
         [Required(ErrorMessage = "文章照片為必填欄位")]
         [AllowedExtensions(".jpg,.png", "傳檔案限制為jpg,png")]
         public IFormFile CoverPhotoImg { get; set; }
+
+        [DisplayName("文章標籤(可以用，進行分隔)")]
+        public List<string> TagsArray { get; set; }
     }
 
-    public class ManagementCreate
+    public class ManagementCreateViewModel
     {
     }
 }

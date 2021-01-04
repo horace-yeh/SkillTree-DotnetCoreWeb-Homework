@@ -19,6 +19,7 @@ namespace Homework.Controllers
          * 2. Model 專案拆分可實現性? 目前因為需要IPagedList，所以也裝了Arch.EntityFrameworkCore.UnitOfWork
          * 3. 圖片上傳時，使用IFormFile 似乎無法使用FileExtensions檢核檔案類型，有什麼方式可以比較簡單處理這部分
          *    https://github.com/aspnet/Mvc/issues/5117
+         * 4. LINQ ROWNumber產生方式
          */
 
         #endregion 問題紀錄
