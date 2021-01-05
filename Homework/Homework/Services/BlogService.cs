@@ -80,7 +80,7 @@ namespace Homework.Services
             articlesCreate.Id = Guid.NewGuid();
             articlesCreate.DayOfWeek = articlesCreate.CreateDate.DayOfWeek;
             _articlesRepository.Insert(articlesCreate);
-            //tag未更新
+            await InserTagCloudSync(articlesCreate.TagsArray);
             await _unitOfWork.SaveChangesAsync();
         }
 
@@ -125,12 +125,36 @@ namespace Homework.Services
             return newFileName;
         }
 
+        /// <summary>
+        /// newList有original沒有
+        /// </summary>
+        /// <param name="original"></param>
+        /// <param name="newList"></param>
+        /// <returns></returns>
+        private IList<string> GetInsertTagCloud(IList<string> original, IList<string> newList)
+        {
+            var diff = newList.Except(original).ToList();
+            return diff;
+        }
+
         private string GetSaveFilePath()
         {
             var webRootPath = _webHostEnvironment.WebRootPath;
             var uploadPath = _configuration.GetValue<string>("AppSettings:UploadPath");
             var filePath = webRootPath + uploadPath;
             return filePath;
+        }
+
+        /// <summary>
+        /// original跟newListe共同都有
+        /// </summary>
+        /// <param name="original"></param>
+        /// <param name="newList"></param>
+        /// <returns></returns>
+        private IList<string> GetUpdateTagCloud(IList<string> original, IList<string> newList)
+        {
+            var intersect = original.Intersect(newList).ToList();
+            return intersect;
         }
 
         private string GetUploadUrl()
@@ -140,6 +164,19 @@ namespace Homework.Services
             var uploadUrl = _configuration.GetValue<string>("AppSettings:UploadUrl");
             var re = urlHelper.Content($@"~{uploadUrl}");
             return re;
+        }
+
+        private async Task InserTagCloudSync(IList<string> tags)
+        {
+            var nowTagCloud = await GetAllTagCloudTextAsync();
+            var insertData = GetInsertTagCloud(nowTagCloud, tags);
+            var updateData = GetUpdateTagCloud(nowTagCloud, tags);
+            foreach (var item in insertData)
+            {
+                _tagClodRepository.Insert(new TagCloud { Id = Guid.NewGuid(), Amount = 1, Name = item });
+            }
+            var tempUpdate = await _tagClodRepository.GetAll().Where(x => updateData.Contains(x.Name)).ToListAsync();
+            tempUpdate.ForEach(x => x.Amount += 1);
         }
 
         private async Task<string> SaveFile(IFormFile file)
