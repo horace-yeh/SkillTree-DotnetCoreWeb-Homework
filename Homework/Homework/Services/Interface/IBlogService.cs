@@ -1,5 +1,6 @@
 ﻿using Arch.EntityFrameworkCore.UnitOfWork.Collections;
 using Homework.Data.Models;
+using Homework.Data.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace Homework.Services.Interface
         ValueTask<IList<string>> GetAllTagCloudTextAsync();
 
         ValueTask<Articles> GetArticleAsync(Guid Id);
+
+        ValueTask SaveArticle(ArticlesCreate articlesCreate);
 
         ValueTask SaveAsync();
 

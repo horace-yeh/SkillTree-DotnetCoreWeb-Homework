@@ -27,14 +27,15 @@ namespace Homework.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(ArticlesCreate model)
+        public async Task<IActionResult> Create(ArticlesCreate model)
         {
             //[Bind("CoverPhotoImg")] 圖片綁定沒加會撈空
 
             ModelState.Remove("CoverPhoto"); // 移除原先圖片必填欄位驗證
             if (ModelState.IsValid)
             {
-                var temp = model;
+                await _blogService.SaveArticle(model);
+                return RedirectToAction("Index", "Management");
             }
 
             return View(model);
