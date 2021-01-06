@@ -13,30 +13,32 @@
         $('#CreateDate').pickadate({
             showMonthsShort: true,
             format: 'yyyy/mm/dd',
-            hiddenName: true
+            hiddenName: true,
         })
     }
 
     function selectTagInit() {
         var url = $('#tagCloudTextUrl').val();
+        var nowTagArr = $('#Tags').val().split(',');
         $.ajax({
             url: url,
             method: 'GET',
             dataType: 'json',
             success: function (res) {
-                setTagCloudSelect(res);
+                setTagCloudSelect(res, nowTagArr);
                 //console.log(res);
             },
             error: function (err) { console.log(err) },
         });
     }
 
-    function setTagCloudSelect(tagArr) {
+    function setTagCloudSelect(tagArr, nowArr) {
         $('#TagsArray').select2({
             tags: true,
             data: tagArr,
-            tokenSeparators: [',']
+            tokenSeparators: [','],
         });
+        $('#TagsArray').val(nowArr).trigger("change");
     }
 
     function ckeditorInit() {

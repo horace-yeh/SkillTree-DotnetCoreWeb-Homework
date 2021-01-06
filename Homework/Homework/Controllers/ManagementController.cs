@@ -41,6 +41,25 @@ namespace Homework.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var model = await _blogService.GetArticleEditAsync(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ArticlesEdit model)
+        {
+            ModelState.Remove("CoverPhoto"); // 移除原先圖片必填欄位驗證
+            if (ModelState.IsValid)
+            {
+                //await _blogService.SaveArticle(model);
+                return RedirectToAction("Index", "Management");
+            }
+
+            return View(model);
+        }
+
         public async Task<IActionResult> Index()
         {
             var model = await _blogService.GetAllArticleAsync();

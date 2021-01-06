@@ -1,9 +1,8 @@
-﻿@model Homework.Data.ViewModels.ArticlesCreate
+﻿@model Homework.Data.ViewModels.ArticlesEdit
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
-
 @section HeadCss {
     <!-- #region font-awesome 5.15.1 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
@@ -17,35 +16,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />
     <!-- #endregion select2 v4.0.13 -->
 }
-<h4>文章建立</h4>
+
+<h4>文章編輯</h4>
 <hr />
 <div class="row">
     <div class="col-12">
-        <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Tags" />
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
-            @*
-                <div class="form-group">
-                    <label asp-for="CoverPhoto" class="control-label"></label>
-                    <input asp-for="CoverPhoto" class="form-control" />
-                    <span asp-validation-for="CoverPhoto" class="text-danger"></span>
-                </div>
-            *@
-            @*<div class="form-group">
-                    <label asp-for="CoverPhotoImg" class="control-label"></label>
-                    <input asp-for="CoverPhotoImg" type="file" class="form-control" />
-                    <span asp-validation-for="CoverPhotoImg" class="text-danger"></span>
-                </div>*@
-
-            @*<div class="custom-file">
-                    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-                    <div class="invalid-feedback">Example invalid custom file feedback</div>
-                </div>*@
             <div class="form-group">
                 <label asp-for="Body" class="control-label"></label>
                 <textarea asp-for="Body" class="form-control"></textarea>
@@ -56,19 +40,42 @@
                 <select asp-for="TagsArray" class="form-control" multiple="multiple" />
                 <span asp-validation-for="TagsArray" class="text-danger"></span>
             </div>
+            @*<div class="form-group">
+                    <label asp-for="CoverPhoto" class="control-label"></label>
+                    <input asp-for="CoverPhoto" class="form-control" />
+                    <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 @*<label asp-for="CreateDate" class="control-label"></label>*@
                 <input type="text" asp-for="CreateDate" class="form-control mt-3" placeholder="請輸入建立日期" />
                 <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <img src="@Model.CoverPhoto" class="img-thumbnail" title="當前文章照片">
             </div>
             <div class="form-group custom-file">
                 <input asp-for="CoverPhotoImg" type="file" class="form-control custom-file-input" />
                 <label asp-for="CoverPhotoImg" class="control-label custom-file-label"></label>
                 <span asp-validation-for="CoverPhotoImg" class="text-danger"></span>
             </div>
+            @*<div class="form-group">
+                    <label asp-for="CreateDate" class="control-label"></label>
+                    <input asp-for="CreateDate" class="form-control" />
+                    <span asp-validation-for="CreateDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DayOfWeek" class="control-label"></label>
+                    <select asp-for="DayOfWeek" class="form-control"></select>
+                    <span asp-validation-for="DayOfWeek" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tags" class="control-label"></label>
+                    <input asp-for="Tags" class="form-control" />
+                    <span asp-validation-for="Tags" class="text-danger"></span>
+                </div>*@
 
             <div class="form-group my-2 row justify-content-center">
-                <input type="submit" value="建立文章" class="btn btn-success btn-sm" />
+                <input type="submit" value="儲存文章" class="btn btn-success btn-sm" />
             </div>
         </form>
     </div>
@@ -94,5 +101,5 @@
     <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
     <!--#endregion CKEditor-->
 
-    <script src="~/js/managementCreate.js" asp-append-version="true"></script>
+    <script src="~/js/managementEdit.js" asp-append-version="true"></script>
 }

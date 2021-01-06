@@ -71,6 +71,23 @@ namespace Homework.Services
             return temp;
         }
 
+        public async ValueTask<ArticlesEdit> GetArticleEditAsync(Guid Id)
+        {
+            var temp = await _articlesRepository.GetFirstOrDefaultAsync(
+                a => new ArticlesEdit
+                {
+                    Body = a.Body,
+                    CoverPhoto = a.CoverPhoto,
+                    CreateDate = a.CreateDate,
+                    DayOfWeek = a.DayOfWeek,
+                    Id = a.Id,
+                    Tags = a.Tags,
+                    Title = a.Title
+                },
+                predicate: x => x.Id == Id);
+            return temp;
+        }
+
         public async ValueTask SaveArticle(ArticlesCreate articlesCreate)
         {
             var fileName = await SaveFile(articlesCreate.CoverPhotoImg);

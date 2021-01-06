@@ -18,6 +18,8 @@ namespace Homework.Services.Interface
 
         ValueTask<Articles> GetArticleAsync(Guid Id);
 
+        ValueTask<ArticlesEdit> GetArticleEditAsync(Guid Id);
+
         ValueTask SaveArticle(ArticlesCreate articlesCreate);
 
         ValueTask SaveAsync();
