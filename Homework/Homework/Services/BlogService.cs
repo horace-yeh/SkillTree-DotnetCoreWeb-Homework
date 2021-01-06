@@ -135,6 +135,24 @@ namespace Homework.Services
 
         }
 
+        public async ValueTask DeleteArticle(Guid Id)
+        {
+            var originalItem = await GetArticleAsync(Id);
+            //上傳檔案處理
+            var UploadUrl = _configuration.GetValue<string>("AppSettings:UploadUrl");
+            var DeleteFileFlag = (originalItem.CoverPhoto.IndexOf(UploadUrl) > -1);
+            if (DeleteFileFlag)
+            {
+                var DeletePath = GetSaveFilePath() + originalItem.CoverPhoto.Replace(UploadUrl, "");
+                DeleteFile(DeletePath);
+            }
+            //標籤雲更新
+            await DeleteTagCloudSync(originalItem.Tags.Split(","));
+
+            _articlesRepository.Delete(Id);
+            await SaveAsync();
+        }
+
         public async ValueTask SaveAsync()
         {
             await _unitOfWork.SaveChangesAsync();

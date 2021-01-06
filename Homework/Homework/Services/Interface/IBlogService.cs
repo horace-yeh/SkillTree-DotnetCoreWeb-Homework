@@ -24,6 +24,8 @@ namespace Homework.Services.Interface
 
         ValueTask EditArticle(ArticlesEdit articlesEdit);
 
+        ValueTask DeleteArticle(Guid Id);
+
         ValueTask<IPagedList<Articles>> ToPagedListArticleAsync(int pageIndex, int pageSize);
 
         ValueTask<IPagedList<Articles>> ToPagedListArticleBySearchAsync(string keyword, int pageIndex, int pageSize);

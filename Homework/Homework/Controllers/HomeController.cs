@@ -22,6 +22,7 @@ namespace Homework.Controllers
          *    https://github.com/aspnet/Mvc/issues/5117
          * 4. LINQ ROWNumber產生方式，頁面呈現很多時候需要一個流水號
          * 5. Model檢核機制有沒有比較活性的做法，同樣的Model新增某個欄位需要檢核，編輯時則不需要
+         * 6. unit of work機制有點異常，更新標籤雲 沒有經過savechange也有存成功
          */
 
         #endregion 問題紀錄

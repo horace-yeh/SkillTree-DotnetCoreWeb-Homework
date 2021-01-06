@@ -21,6 +21,12 @@ namespace Homework.Controllers
             _blogService = blogService;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            var model = await _blogService.GetAllArticleAsync();
+            return View(model);
+        }
+
         public IActionResult Create()
         {
             return View();
@@ -60,10 +66,10 @@ namespace Homework.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var model = await _blogService.GetAllArticleAsync();
-            return View(model);
+            await _blogService.DeleteArticle(id);
+            return RedirectToAction("Index", "Management");
         }
 
         public async Task<JsonResult> JsonGetTagCloudText()
