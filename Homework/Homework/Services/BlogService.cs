@@ -98,7 +98,41 @@ namespace Homework.Services
             articlesCreate.DayOfWeek = articlesCreate.CreateDate.DayOfWeek;
             _articlesRepository.Insert(articlesCreate);
             await InserTagCloudSync(articlesCreate.TagsArray);
-            await _unitOfWork.SaveChangesAsync();
+            //await _unitOfWork.SaveChangesAsync();
+            await SaveAsync();
+        }
+
+        public async ValueTask EditArticle(ArticlesEdit articlesEdit)
+        {
+            var originalItem = await GetArticleAsync(articlesEdit.Id);
+
+            //標籤更新機制，先刪除再跑新增機制
+            await DeleteTagCloudSync(originalItem.Tags.Split(","));
+            await InserTagCloudSync(articlesEdit.TagsArray);
+
+            //上傳圖片處理
+            var UploadUrl = _configuration.GetValue<string>("AppSettings:UploadUrl");
+            var DeleteFileFlag = (originalItem.CoverPhoto.IndexOf(UploadUrl) > -1);
+            if(articlesEdit.CoverPhotoImg != null)
+            {
+                var fileName = await SaveFile(articlesEdit.CoverPhotoImg);
+                var fileUrl = GetUploadUrl() + fileName;             
+                if (DeleteFileFlag)
+                {
+                    var DeletePath = GetSaveFilePath()+ originalItem.CoverPhoto.Replace(UploadUrl,"");
+                    DeleteFile(DeletePath);
+                }
+                originalItem.CoverPhoto = fileUrl;
+            }
+
+            originalItem.Tags = string.Join(",", articlesEdit.TagsArray);
+            originalItem.DayOfWeek = articlesEdit.CreateDate.DayOfWeek;
+            originalItem.Body = articlesEdit.Body;
+            originalItem.Title = articlesEdit.Title;
+
+            _articlesRepository.Update(originalItem);
+            await SaveAsync();
+
         }
 
         public async ValueTask SaveAsync()
@@ -194,6 +228,12 @@ namespace Homework.Services
             }
             var tempUpdate = await _tagClodRepository.GetAll().Where(x => updateData.Contains(x.Name)).ToListAsync();
             tempUpdate.ForEach(x => x.Amount += 1);
+        }
+
+        private async Task DeleteTagCloudSync(IList<string> tags)
+        {
+            var tempDelete = await _tagClodRepository.GetAll().Where(x => tags.Contains(x.Name)).ToListAsync();
+            tempDelete.ForEach(x => x.Amount -= 1);
         }
 
         private async Task<string> SaveFile(IFormFile file)

@@ -15,16 +15,16 @@ namespace Homework.Controllers
     {
         #region 問題紀錄
 
+        //TODO:問題紀錄
         /* 1. EFcore 有辦法抽離成repository service架構嗎，不在主要專案安裝EFCore?
          * 2. Model 專案拆分可實現性? 目前因為需要IPagedList，所以也裝了Arch.EntityFrameworkCore.UnitOfWork
          * 3. 圖片上傳時，使用IFormFile 似乎無法使用FileExtensions檢核檔案類型，有什麼方式可以比較簡單處理這部分
          *    https://github.com/aspnet/Mvc/issues/5117
-         * 4. LINQ ROWNumber產生方式
+         * 4. LINQ ROWNumber產生方式，頁面呈現很多時候需要一個流水號
+         * 5. Model檢核機制有沒有比較活性的做法，同樣的Model新增某個欄位需要檢核，編輯時則不需要
          */
 
         #endregion 問題紀錄
-
-        //TODO: Pagination 需要改寫配合，不同的搜尋機制產生對應的分頁
 
         private readonly IBlogService _blogService;
         private readonly ILogger<HomeController> _logger;

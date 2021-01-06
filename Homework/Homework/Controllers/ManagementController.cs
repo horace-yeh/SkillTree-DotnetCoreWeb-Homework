@@ -53,7 +53,7 @@ namespace Homework.Controllers
             ModelState.Remove("CoverPhoto"); // 移除原先圖片必填欄位驗證
             if (ModelState.IsValid)
             {
-                //await _blogService.SaveArticle(model);
+                await _blogService.EditArticle(model);
                 return RedirectToAction("Index", "Management");
             }
 
