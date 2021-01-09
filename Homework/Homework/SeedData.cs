@@ -49,8 +49,12 @@ namespace Homework
                     });
                     tags.Append(tag + ",");
                 }
+                var tagClouds = tags.ToString().Split(',')
+                    .GroupBy(x => x)
+                    .Select(g => new TagCloud { Id = Guid.NewGuid(), Amount = g.Count(), Name = g.Key });
 
                 context.Articles.AddRange(tmp);
+                context.TagCloud.AddRange(tagClouds);
                 context.SaveChanges();
             }
         }
