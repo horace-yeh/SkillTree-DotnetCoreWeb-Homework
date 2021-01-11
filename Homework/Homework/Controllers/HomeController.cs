@@ -36,7 +36,7 @@ namespace Homework.Controllers
             _blogService = blogService;
         }
 
-        public async Task<IActionResult> Detial(Guid id)
+        public async Task<IActionResult> Detail(Guid id)
         {
             var model = await _blogService.GetArticleAsync(id);
             return View(model);
